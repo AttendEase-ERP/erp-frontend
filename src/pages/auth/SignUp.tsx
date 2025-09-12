@@ -14,12 +14,12 @@ import InputField from "@/components/auth/InputField";
 
 const schema = z.object({
   email: z.string().email("Invalid email address"),
-  password: z.string(),
+  password: z.string().min(6, "Password must be at least 6 characters"),
 });
 
 type FormData = z.infer<typeof schema>;
 
-export default function SignIn() {
+export default function SignUp() {
   const {
     register,
     handleSubmit,
@@ -43,7 +43,7 @@ export default function SignIn() {
       boxShadow="md"
     >
       <Heading size="lg" mb={6} textAlign="center">
-        Sign In to AttendEase
+        Sign Up to AttendEase
       </Heading>
 
       <form onSubmit={handleSubmit(onSubmit)}>
@@ -67,20 +67,14 @@ export default function SignIn() {
               error={errors.password}
             />
 
-            <Text textAlign="right">
-              <Link href="/forgot-password" color="blue.500">
-                Forgot password?
-              </Link>
-            </Text>
-
             <Button type="submit" width="full" loading={isSubmitting}>
-              Sign In
+              Sign Up
             </Button>
 
             <Text textAlign="center">
-              Don’t have an account?{" "}
-              <Link href="/sign-up" color="blue.500">
-                Sign up
+              Already have an account?{" "}
+              <Link href="/sign-in" color="blue.500">
+                Sign in
               </Link>
             </Text>
           </Stack>
