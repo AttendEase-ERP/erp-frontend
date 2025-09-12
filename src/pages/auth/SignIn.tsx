@@ -11,6 +11,9 @@ import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import InputField from "@/components/auth/InputField";
+import { useSignIn } from "@clerk/react-router";
+import { useNavigate } from "react-router";
+import { useState } from "react";
 
 const schema = z.object({
   email: z.string().email("Invalid email address"),
@@ -28,8 +31,24 @@ export default function SignIn() {
     resolver: zodResolver(schema),
   });
 
+  const { signIn } = useSignIn();
+  const navigate = useNavigate();
+  const [formError, setFormError] = useState("");
+
   const onSubmit = async (data: FormData) => {
-    console.log("Form Data:", data);
+    setFormError("");
+    try {
+      await signIn?.create({
+        identifier: data.email,
+        password: data.password,
+      });
+
+      navigate("/dashboard");
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    } catch (err: any) {
+      console.error("Sign-in error:", err);
+      setFormError(err.errors?.[0]?.longMessage || "Failed to sign in");
+    }
   };
 
   return (
@@ -66,6 +85,12 @@ export default function SignIn() {
               register={register}
               error={errors.password}
             />
+
+            {formError && (
+              <Text color="red.500" textAlign="center" fontSize="sm">
+                {formError}
+              </Text>
+            )}
 
             <Text textAlign="right">
               <Link href="/forgot-password" color="blue.500">

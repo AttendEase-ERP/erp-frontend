@@ -1,27 +1,44 @@
 import { SignedIn, SignedOut } from "@clerk/react-router";
 import SignIn from "./pages/auth/SignIn";
 import SignUp from "./pages/auth/SignUp";
-import { Route, Routes } from "react-router";
+import { Navigate, Route, Routes } from "react-router";
+import ProtectedRoute from "./components/auth/ProtectedRoute";
 
-const App = () => {
+export default function App() {
   return (
     <div>
-      <SignedIn>
-        <Routes>
-          <Route
-            path="/dashboard"
-            element={<div>Welcome to AttendEase!</div>}
-          />
-        </Routes>
-      </SignedIn>
-      <SignedOut>
-        <Routes>
-          <Route path="/sign-in" element={<SignIn />} />
-          <Route path="/sign-up" element={<SignUp />} />
-        </Routes>
-      </SignedOut>
+      <Routes>
+        <Route
+          path="/dashboard"
+          element={<ProtectedRoute>welcome to attendease!</ProtectedRoute>}
+        />
+        <Route
+          path="/sign-in"
+          element={
+            <>
+              <SignedOut>
+                <SignIn />
+              </SignedOut>
+              <SignedIn>
+                <Navigate to="/dashboard" replace />
+              </SignedIn>
+            </>
+          }
+        />
+        <Route
+          path="/sign-up"
+          element={
+            <>
+              <SignedOut>
+                <SignUp />
+              </SignedOut>
+              <SignedIn>
+                <Navigate to="/dashboard" replace />
+              </SignedIn>
+            </>
+          }
+        />
+      </Routes>
     </div>
   );
-};
-
-export default App;
+}
