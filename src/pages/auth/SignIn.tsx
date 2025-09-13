@@ -16,7 +16,7 @@ import { useNavigate } from "react-router";
 import { useState } from "react";
 
 const schema = z.object({
-  email: z.string().email("Invalid email address"),
+  email: z.email("Invalid email address"),
   password: z.string(),
 });
 
