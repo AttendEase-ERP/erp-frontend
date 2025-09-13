@@ -11,7 +11,7 @@ import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import InputField from "@/components/auth/InputField";
-import { useSignIn } from "@clerk/react-router";
+import { useClerk, useSignIn } from "@clerk/react-router";
 import { useNavigate } from "react-router";
 import { useState } from "react";
 
@@ -33,17 +33,21 @@ export default function SignIn() {
 
   const { signIn } = useSignIn();
   const navigate = useNavigate();
+  const { setActive } = useClerk();
   const [formError, setFormError] = useState("");
 
   const onSubmit = async (data: FormData) => {
     setFormError("");
     try {
-      await signIn?.create({
+      const res = await signIn?.create({
         identifier: data.email,
         password: data.password,
       });
 
-      navigate("/dashboard");
+      if (res?.status == "complete") {
+        await setActive({ session: res.createdSessionId });
+        navigate("/dashboard");
+      }
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
     } catch (err: any) {
       console.error("Sign-in error:", err);
