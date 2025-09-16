@@ -38,6 +38,7 @@ export default function App() {
             </>
           }
         />
+        <Route path="*" element={<Navigate to="/sign-in" replace />} />
       </Routes>
     </div>
   );
