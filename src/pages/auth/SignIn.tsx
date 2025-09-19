@@ -34,7 +34,7 @@ export default function SignIn() {
   const { signIn } = useSignIn();
   const navigate = useNavigate();
   const { setActive } = useClerk();
-  const [formError, setFormError] = useState("");
+  const [formError, setFormError] = useState<string>("");
 
   const onSubmit = async (data: FormData) => {
     setFormError("");
