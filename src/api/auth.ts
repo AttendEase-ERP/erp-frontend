@@ -1,4 +1,4 @@
-import { api } from "./apiClient";
+import { api } from "./index";
 
 // Fetch logged in user email
 export async function fetchUserEmail() {
