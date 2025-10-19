@@ -14,7 +14,8 @@ import InputField from "@/components/auth/InputField";
 import { useClerk, useSignIn } from "@clerk/react-router";
 import { useNavigate } from "react-router";
 import { useState } from "react";
-import { fetchUserRole } from "@/api";
+import { fetchUserDetails } from "@/api";
+import { saveUserDetails } from "@/lib/idb/user/queries";
 
 const schema = z.object({
   email: z.email("Invalid email address"),
@@ -45,11 +46,15 @@ export default function SignIn() {
         password: data.password,
       });
 
-      if (res?.status == "complete") {
+      if (res?.status === "complete") {
         await setActive({ session: res.createdSessionId });
+
+        // fetch user details and navigate to dashboard
+        const userDetails = await fetchUserDetails(data.email);
         navigate("/dashboard");
-        const role = await fetchUserRole(data.email);
-        console.log("Logged in user role:", role);
+
+        // save user data to idb
+        await saveUserDetails(userDetails);
       }
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
     } catch (err: any) {

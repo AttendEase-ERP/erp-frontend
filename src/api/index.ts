@@ -1,6 +1,6 @@
 /* export all api functions from here */
 import { api } from "./apiClient";
 import { fetchUserEmail } from "./auth";
-import { fetchUserRole } from "./user";
+import { fetchUserDetails } from "./user";
 
-export { api, fetchUserEmail, fetchUserRole };
+export { api, fetchUserEmail, fetchUserDetails };
