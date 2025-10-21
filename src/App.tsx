@@ -2,16 +2,15 @@ import { SignedIn, SignedOut } from "@clerk/react-router";
 import SignIn from "./pages/auth/SignIn";
 import SignUp from "./pages/auth/SignUp";
 import { Navigate, Route, Routes } from "react-router";
-import ProtectedRoute from "./components/auth/ProtectedRoute";
+import Dashboard from "./pages/teacher/Dashboard";
+import NotFound from "./pages/NotFound/NotFound";
 
 export default function App() {
   return (
     <div>
       <Routes>
-        <Route
-          path="/dashboard"
-          element={<ProtectedRoute>welcome to attendease!</ProtectedRoute>}
-        />
+        <Route path="/dashboard" element={<Dashboard />} />
+
         <Route
           path="/sign-in"
           element={
@@ -25,6 +24,7 @@ export default function App() {
             </>
           }
         />
+
         <Route
           path="/sign-up"
           element={
@@ -38,7 +38,20 @@ export default function App() {
             </>
           }
         />
-        <Route path="*" element={<Navigate to="/sign-in" replace />} />
+
+        <Route
+          path="*"
+          element={
+            <>
+              <SignedIn>
+                <NotFound />
+              </SignedIn>
+              <SignedOut>
+                <Navigate to="/sign-in" replace />
+              </SignedOut>
+            </>
+          }
+        />
       </Routes>
     </div>
   );
