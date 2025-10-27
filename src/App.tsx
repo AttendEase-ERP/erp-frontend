@@ -11,6 +11,7 @@ export default function App() {
     <div>
       <Routes>
         <Route path="/dashboard" element={<Dashboard />} />
+        <Route path="/" element={<Navigate to="/dashboard" replace />} />
 
         <Route
           path="/sign-in"
