@@ -1,8 +1,9 @@
+import { Navigate, Route, Routes } from "react-router";
 import { SignedIn, SignedOut } from "@clerk/react-router";
+
 import SignIn from "./pages/auth/SignIn";
 import SignUp from "./pages/auth/SignUp";
-import { Navigate, Route, Routes } from "react-router";
-import Dashboard from "./pages/teacher/Dashboard";
+import Dashboard from "./components/Dashboard/teacher/Dashboard";
 import NotFound from "./pages/NotFound/NotFound";
 
 export default function App() {

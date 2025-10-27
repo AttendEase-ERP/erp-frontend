@@ -2,6 +2,7 @@ import React from "react";
 import ReactDOM from "react-dom/client";
 import { ClerkProvider, useAuth } from "@clerk/clerk-react";
 import { BrowserRouter } from "react-router";
+
 import { Provider } from "./components/ui/provider";
 import App from "./App";
 import { ChakraProvider } from "@chakra-ui/react";
