@@ -6,7 +6,7 @@ interface BaseUser {
 
 export interface TeacherDetails extends BaseUser {
   role: "teacher";
-  section: string;
+  section: Array<string>;
   subject: string;
   course_name: string;
   course_duration: string;

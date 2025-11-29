@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router";
+import { SignOutButton } from "@clerk/react-router";
 
 import { Avatar, Box, HStack, Stack, Text, VStack } from "@chakra-ui/react";
 import { Tooltip } from "@/components/ui/tooltip";
@@ -13,6 +14,7 @@ import {
 } from "react-icons/fi";
 
 import { idb } from "@/lib/idb";
+import { onSignOutCleanup } from "@/lib/auth/onSignOut";
 
 export default function Dashboard() {
   const navigate = useNavigate();
@@ -92,19 +94,21 @@ export default function Dashboard() {
             content={!isExpanded ? "Logout" : ""}
             positioning={{ placement: "right" }}
           >
-            <HStack
-              as="button"
-              w="full"
-              px={3}
-              py={2}
-              rounded="md"
-              justify={isExpanded ? "flex-start" : "center"}
-              _hover={{ bg: "hoverBg" }}
-              onClick={() => console.log("Logged out")}
-            >
-              <FiLogOut color="iconColor" size={20} />
-              {isExpanded && <Text>Logout</Text>}
-            </HStack>
+            <SignOutButton>
+              <HStack
+                as="button"
+                w="full"
+                px={3}
+                py={2}
+                rounded="md"
+                justify={isExpanded ? "flex-start" : "center"}
+                _hover={{ bg: "hoverBg" }}
+                onClick={() => onSignOutCleanup()}
+              >
+                <FiLogOut color="iconColor" size={20} />
+                {isExpanded && <Text>Logout</Text>}
+              </HStack>
+            </SignOutButton>
           </Tooltip>
         </Box>
       </VStack>
