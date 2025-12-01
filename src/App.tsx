@@ -6,33 +6,11 @@ import SignUp from "./pages/auth/SignUp";
 import Dashboard from "./components/Dashboard/teacher/Dashboard";
 import NotFound from "./pages/NotFound/NotFound";
 import ProtectedRoute from "./components/common/ProtectedRoute";
+import SettingsPage from "./pages/Settings";
 
 export default function App() {
   return (
     <Routes>
-      <Route
-        path="/dashboard"
-        element={
-          <>
-            <SignedIn>
-              <Dashboard />
-            </SignedIn>
-            <SignedOut>
-              <Navigate to="/sign-in" replace />
-            </SignedOut>
-          </>
-        }
-      />
-
-      <Route
-        path="/dashboard"
-        element={
-          <ProtectedRoute>
-            <Dashboard />
-          </ProtectedRoute>
-        }
-      />
-
       <Route
         path="/sign-in"
         element={
@@ -60,6 +38,26 @@ export default function App() {
           </>
         }
       />
+
+      <Route
+        path="/dashboard"
+        element={
+          <ProtectedRoute>
+            <Dashboard />
+          </ProtectedRoute>
+        }
+      />
+
+      <Route
+        path="/settings"
+        element={
+          <ProtectedRoute>
+            <SettingsPage />
+          </ProtectedRoute>
+        }
+      />
+
+      <Route path="/" element={<Navigate to="/dashboard" replace />} />
 
       <Route
         path="*"
