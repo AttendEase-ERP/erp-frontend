@@ -16,7 +16,7 @@ import {
 import { idb } from "@/lib/idb";
 import { onSignOutCleanup } from "@/lib/auth/onSignOut";
 
-export default function Dashboard() {
+export default function TeacherDashboard() {
   const navigate = useNavigate();
   const [isExpanded, setIsExpanded] = useState(false);
   const [teacherName, setTeacherName] = useState("");
