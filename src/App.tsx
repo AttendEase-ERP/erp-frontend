@@ -3,7 +3,7 @@ import { SignedIn, SignedOut } from "@clerk/react-router";
 
 import SignIn from "./pages/auth/SignIn";
 import SignUp from "./pages/auth/SignUp";
-import Dashboard from "./components/Dashboard/teacher/Dashboard";
+import Dashboard from "./pages/Dashboard";
 import NotFound from "./pages/NotFound/NotFound";
 import ProtectedRoute from "./components/common/ProtectedRoute";
 import SettingsPage from "./pages/Settings";
