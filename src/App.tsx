@@ -3,10 +3,12 @@ import { SignedIn, SignedOut } from "@clerk/react-router";
 
 import SignIn from "./pages/auth/SignIn";
 import SignUp from "./pages/auth/SignUp";
-import Dashboard from "./pages/Dashboard";
+import DashboardPage from "./pages/Dashboard";
 import NotFound from "./pages/NotFound/NotFound";
 import ProtectedRoute from "./components/common/ProtectedRoute";
 import SettingsPage from "./pages/Settings";
+import { DashboardLayout } from "./pages/Dashboard/DashboardLayout";
+import AttendanceSheet from "./pages/teacher/AttendanceSheet";
 
 export default function App() {
   return (
@@ -43,10 +45,27 @@ export default function App() {
         path="/dashboard"
         element={
           <ProtectedRoute>
-            <Dashboard />
+            <DashboardLayout />
           </ProtectedRoute>
         }
-      />
+      >
+        <Route
+          index
+          element={
+            <ProtectedRoute>
+              <DashboardPage />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path=":section"
+          element={
+            <ProtectedRoute>
+              <AttendanceSheet />
+            </ProtectedRoute>
+          }
+        />
+      </Route>
 
       <Route
         path="/settings"

@@ -1,16 +1,12 @@
 import { useEffect, useState } from "react";
-import { useNavigate } from "react-router";
-import { Box, HStack, Text, VStack } from "@chakra-ui/react";
-import { FiHome, FiShare2, FiMessageCircle, FiSettings } from "react-icons/fi";
+import { Box, Text, VStack } from "@chakra-ui/react";
 
 import { SemesterSectionGrid } from "@/components/common/cards/SemesterSectionGrid";
-import { Sidebar } from "@/components/common/layout/Sidebar";
 
 import { idb } from "@/lib/idb";
 import type { UserDetails } from "@/lib/idb/types";
 
 export default function TeacherDashboard() {
-  const navigate = useNavigate();
   const [user, setUser] = useState<UserDetails | null>(null);
 
   useEffect(() => {
@@ -20,17 +16,14 @@ export default function TeacherDashboard() {
     })();
   }, []);
 
-  const menuItems = [
-    { icon: FiHome, label: "Dashboard", path: "/dashboard" },
-    { icon: FiShare2, label: "Sharing", path: "/sharing" },
-    { icon: FiMessageCircle, label: "Chat", path: "/chat" },
-    { icon: FiSettings, label: "Settings", path: "/settings" },
-  ];
-
   return (
-    <HStack h="100vh" bg="bg" gap={0}>
-      <Sidebar menuItems={menuItems} user={user} onNavigate={navigate} />
-
+    <Box
+      h="100vh"
+      w="100%"
+      display="flex"
+      flexDirection="row"
+      alignItems="stretch"
+    >
       <Box flex="1" p={8} overflowY="auto">
         <VStack align="start" gap={6}>
           <Box>
@@ -48,6 +41,6 @@ export default function TeacherDashboard() {
           {user?.role === "teacher" && <SemesterSectionGrid user={user} />}
         </VStack>
       </Box>
-    </HStack>
+    </Box>
   );
 }
