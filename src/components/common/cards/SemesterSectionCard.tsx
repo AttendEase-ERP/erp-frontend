@@ -13,7 +13,7 @@ export function SemesterSectionCard({
   const navigate = useNavigate();
 
   const handleClick = () => {
-    navigate(`/dashboard/${section}`);
+    navigate(`/dashboard/${semester}/${section}`);
   };
 
   return (
@@ -30,7 +30,7 @@ export function SemesterSectionCard({
     >
       <Card.Body textAlign="center" py="6">
         <Text fontSize="2xl" fontWeight="bold">
-          {semester}
+          {semester} Sem
         </Text>
 
         <Text mt="2" color="fg.muted" fontSize="lg">

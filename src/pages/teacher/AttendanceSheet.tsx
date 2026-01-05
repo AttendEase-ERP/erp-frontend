@@ -2,7 +2,10 @@ import { useParams } from "react-router";
 import { Box, Text } from "@chakra-ui/react";
 
 export default function AttendanceSheet() {
-  const { section } = useParams<{ section: string }>();
+  const { semester, section } = useParams<{
+    semester: string;
+    section: string;
+  }>();
 
   return (
     <Box
@@ -13,7 +16,7 @@ export default function AttendanceSheet() {
       alignItems="stretch"
     >
       <Text fontSize="2xl" fontWeight="bold">
-        Attendance: {section?.toUpperCase()}
+        Attendance: {section?.toUpperCase()}, {semester} Sem
       </Text>
     </Box>
   );

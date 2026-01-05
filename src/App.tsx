@@ -58,7 +58,7 @@ export default function App() {
           }
         />
         <Route
-          path=":section"
+          path=":semester/:section"
           element={
             <ProtectedRoute>
               <AttendanceSheet />

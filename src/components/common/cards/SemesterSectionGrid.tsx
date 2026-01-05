@@ -20,7 +20,7 @@ export function SemesterSectionGrid({ user }: Props) {
       {teacher.section.map((sec) => (
         <SemesterSectionCard
           key={sec}
-          semester={teacher.course_duration + " Sem"}
+          semester={teacher.course_duration}
           section={sec}
         />
       ))}
